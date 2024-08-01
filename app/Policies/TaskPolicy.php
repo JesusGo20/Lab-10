@@ -8,13 +8,13 @@ use Illuminate\Auth\Access\Response;
 
 class TaskPolicy
 {
-   
-  
 
-    public function autorized(User $user, Task $task): bool
+
+
+    public function autorized(User $user, Task $task): Response
     {
-        return $task->user->is($user);
+        return $task->user->is($user)
+            ? Response::allow()
+            : Response::deny('No estás autorizado para realizar esta acción');
     }
-
-   
 }
